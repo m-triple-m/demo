@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Farm Life — a Harvest Moon-inspired farming and life simulation game built with Phaser 3." />
+    <meta name="theme-color" content="#1a1a1a" />
+    <title>Farm Life</title>
+
+    <!-- Pixel-art Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background-color: #0d0d0d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: 'Press Start 2P', monospace;
+      }
+
+      /* Phaser canvas container */
+      #game-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Keep pixels sharp at any zoom level */
+      canvas {
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+        display: block;
+      }
+
+      /* Loading screen shown before Phaser initializes */
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+        background: #0d0d0d;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #5a8a3a;
+        font-size: 12px;
+        letter-spacing: 2px;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
+
+      #loading-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #loading-screen h1 {
+        font-size: 18px;
+        color: #d4e890;
+        text-shadow: 2px 2px 0 #1a3010;
+        margin-bottom: 16px;
+      }
+
+      #loading-screen p {
+        font-size: 6px;
+        color: #5a8a3a;
+        animation: blink 1s step-end infinite;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pre-Phaser loading screen -->
+    <div id="loading-screen">
+      <h1>FARM LIFE</h1>
+      <p>Loading...</p>
+    </div>
+
+    <div id="game-container"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Hide the HTML loading screen once Phaser's canvas is created
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const screen = document.getElementById('loading-screen');
+          if (screen) screen.classList.add('hidden');
+        }, 800);
+      });
+    </script>
+  </body>
+</html>
